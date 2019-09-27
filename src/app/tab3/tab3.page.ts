@@ -10,15 +10,13 @@ import { FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  expenses: Expense[] = [{
-    id: '1L',
-    title: 'Sample data',
-    ammount: 20
-  }];
+  expenses: Expense[] = [];
   expenseForm: FormGroup;
   expense = '';
   amount = null;
   total = 0;
+  showData = false;
+
   constructor() { }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -39,6 +37,7 @@ export class Tab3Page {
   clear() {
     this.expense = '';
     this.amount = null;
+    this.hideExpenseForm();
   }
   delete(data) {
     const index: number = this.expenses.indexOf(data);
@@ -48,8 +47,17 @@ export class Tab3Page {
     this.calculateTotal();
   }
   calculateTotal() {
+    this.total = 0;
     this.expenses.forEach(element => {
       this.total += element.ammount;
     });
+  }
+
+  showExpenseForm() {
+    this.showData = true;
+  }
+
+  hideExpenseForm() {
+    this.showData = false;
   }
 }

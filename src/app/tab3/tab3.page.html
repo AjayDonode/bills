@@ -1,8 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Budget Planner
+      Budgets
     </ion-title>
+    <ion-buttons end>
+      <ion-button (click)="showExpenseForm()" end>
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,9 +15,9 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-        <ion-card>
+        <ion-card *ngIf="showData">
           <ion-card-header>
-            <ion-card-title>New Expense</ion-card-title>
+            <ion-card-title>New Entry</ion-card-title>
           </ion-card-header>
 
           <ion-card-content>
@@ -20,27 +25,36 @@
               (ngSubmit)="onSubmit(addExpense)"
             > -->
             <ion-item>
-              <ion-label position="floating">Expense</ion-label>
+              <ion-label position="floating">Title</ion-label>
               <ion-input id="expense" [(ngModel)]="expense"></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-label position="floating">Amount</ion-label>
-              <ion-input
-                id="amount"
-                type="number"
-                [(ngModel)]="amount"
-              ></ion-input>
+              <ion-input id="amount" type="number" [(ngModel)]="amount"></ion-input>
             </ion-item>
-            <div margin-vertical text-right>
-              <ion-button (click)="addExpenseRequest()"
-                ><ion-icon name="add" slot="start"></ion-icon>Add
-                Expense</ion-button
-              >
-              <ion-button fill="outline" color="danger" (click)="clear()"
-                ><ion-icon name="close" slot="start"></ion-icon
-                >Clear</ion-button
-              >
+            <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-select placeholder="Select One">
+                  <ion-select-option value="grocery">Grocery</ion-select-option>
+                  <ion-select-option value="banking">Banking</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Type</ion-label>
+                  <ion-select placeholder="Select One">
+                    <ion-select-option value="f">Monthly</ion-select-option>
+                    <ion-select-option value="m">Anual</ion-select-option>
+                    <ion-select-option value="n">default</ion-select-option>
+                  </ion-select>
+                </ion-item>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button (click)="addExpenseRequest()">
+                <ion-icon name="add" slot="start"></ion-icon>Add
+                Expense
+              </ion-button>
+              <ion-button fill="outline" color="danger" (click)="clear()">
+                <ion-icon name="close" slot="start"></ion-icon>Clear
+              </ion-button>
             </div>
             <!-- </form> -->
           </ion-card-content>
@@ -55,10 +69,11 @@
             <ion-label>{{ expense.ammount }}</ion-label>
             <ion-icon name="trash" (click)="delete(expense)"></ion-icon>
           </ion-item>
-          <ion-item >
-              <ion-label>Total</ion-label>
-              <ion-label>{{ total }}</ion-label>
-            </ion-item>
+          <ion-item>
+            <ion-label>Total</ion-label>
+            <ion-label>{{ total }}</ion-label>
+            <ion-icon></ion-icon>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
