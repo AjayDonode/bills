@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title> Add income</ion-title>
     <ion-buttons slot="start">
-        <ion-label color="primary" (click)="closeModal()" slot="start">cancel</ion-label>
+        <ion-label color="primary" (click)="close()" slot="start">cancel</ion-label>
       </ion-buttons>
   </ion-toolbar>
  </ion-header>
@@ -14,15 +14,15 @@
               <ion-card-content>
                 <ion-item>
                   <ion-label position="floating">Title</ion-label>
-                  <ion-input id="expense" [(ngModel)]="title"></ion-input>
+                  <ion-input id="title" [(ngModel)]="income.title"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">Amount</ion-label>
-                  <ion-input id="amount" type="number" [(ngModel)]="amount"></ion-input>
+                  <ion-input id="amount" type="number" [(ngModel)]="income.amount"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>Occurance</ion-label>
-                    <ion-select [(ngModel)]="payType" interface="popover">
+                    <ion-select [(ngModel)]="income.payType" interface="popover">
                         <ion-select-option value="1">Annualy</ion-select-option>
                       <ion-select-option value="2">Monthly</ion-select-option>
                       <ion-select-option value="3">Bi-Weekly</ion-select-option>
@@ -32,14 +32,14 @@
                   </ion-item>
                   <ion-item>
                       <ion-label position="floating">Description</ion-label>
-                      <ion-textarea id="description" [(ngModel)]="description"></ion-textarea>
+                      <ion-textarea id="description" [(ngModel)]="income.description"></ion-textarea>
                     </ion-item>
                 <div class="ion-margin-vertical ion-text-center">
                   <ion-button (click)="addIncomeRequest()">
                     <ion-icon name="add" slot="start"></ion-icon>Add
                     Expense
                   </ion-button>
-                  <ion-button fill="outline" color="danger" (click)="closeModal()">
+                  <ion-button fill="outline" color="danger" (click)="close()">
                     <ion-icon name="close" slot="start"></ion-icon>Cancle
                   </ion-button>
                 </div>
