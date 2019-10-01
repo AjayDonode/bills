@@ -9,19 +9,24 @@ import { ModalController, NavParams } from '@ionic/angular';
 export class AddIncomePage implements OnInit {
   modalTitle: string;
   modelId: number;
-
+  title: string;
+  amount: number;
+  description: string;
+  payType: number;
   constructor(
     private modalController: ModalController,
     private navParams: NavParams
   ) { }
 
   ngOnInit() {
-    console.table(this.navParams);
     this.modelId = this.navParams.data.paramID;
     this.modalTitle = this.navParams.data.paramTitle;
   }
+  addIncomeRequest() {
+    this.closeModal();
+  }
   async closeModal() {
-    const onClosedData = "Wrapped Up!";
+    const onClosedData = 'Wrapped Up!';
     await this.modalController.dismiss(onClosedData);
   }
 }

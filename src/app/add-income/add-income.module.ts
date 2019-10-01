@@ -21,8 +21,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  exports: [ AddIncomePage ],
   declarations: [AddIncomePage],
-  entryComponents: [AddIncomePage],
+  entryComponents: [AddIncomePage]
 })
 export class AddIncomePageModule {}

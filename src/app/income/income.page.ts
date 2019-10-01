@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Income } from './income.model';
 import { ModalController } from '@ionic/angular';
-import { AddIncomePageModule } from '../add-income/add-income.module';
+import { AddIncomePage } from '../add-income/add-income.page';
 
 @Component({
   selector: 'app-income',
@@ -18,7 +18,7 @@ export class IncomePage implements OnInit {
     console.log('Here ');
     
     const modal = await this.modalController.create({
-      component: AddIncomePageModule,
+      component: AddIncomePage,
       componentProps: {
         "paramID": 123,
         "paramTitle": "Test Title"
