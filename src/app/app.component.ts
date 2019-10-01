@@ -17,6 +17,20 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  appPages = [
+    {
+      title: 'Add Income',
+      url: '/income'
+  },
+    {
+      title: 'Home',
+      url: '/home'
+    },
+    {
+        title: 'Setting',
+        url: '/setting'
+    }
+  ];
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
