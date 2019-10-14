@@ -18,6 +18,7 @@ export class IncomeService {
         return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
+          data.id = id;
           return { id, ...data };
         });
       })
@@ -32,6 +33,9 @@ export class IncomeService {
     return this.incomeCollection.add(income);
   }
 
+  updateIncome(income: Income) {
+    return this.incomeCollection.doc(income.id).update(income);
+  }
 
   removeIncome(id) {
     return this.incomeCollection.doc(id).delete();

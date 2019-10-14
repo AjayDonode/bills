@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Expenses
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal()" end>
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-list>
+          <ion-item *ngFor="let expense of expenses" #ival>
+            <ion-label>{{ expense.title }}</ion-label>
+            <ion-label>{{ expense.amount }}</ion-label>
+            <ion-label>{{ expense.payType }}</ion-label>
+            <ion-icon name="trash" (click)="delete(expense)"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Total Exp</ion-label>
+            <ion-label>{{ totalExpenses }}</ion-label>
+            <ion-label></ion-label>
+            <ion-icon></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Total</ion-label>
+            <ion-label>{{ totalExpenses - totalIncome }}</ion-label>
+            <ion-label></ion-label>
+            <ion-icon></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

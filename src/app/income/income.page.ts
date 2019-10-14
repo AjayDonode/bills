@@ -4,6 +4,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { AddIncomePage } from '../add-income/add-income.page';
 import { IncomeService } from '../services/income.service';
 import { Observable } from 'rxjs';
+import { ExpenseType } from '../shared/enums';
 
 @Component({
   selector: 'app-income',
@@ -11,11 +12,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./income.page.scss'],
 })
 export class IncomePage implements OnInit, OnDestroy {
-  
+  isBusy = false;
   private subscription;
   incomeList: Income[];
   total = 0;
   constructor(public modalController: ModalController, private nav: NavController, private incomeService: IncomeService) {
+  }
+
+  edit(income) {
+    this.openModal(income);
   }
 
   delete(income) {
@@ -25,33 +30,41 @@ export class IncomePage implements OnInit, OnDestroy {
 
   calculateTotal() {
     this.total = 0;
-    this.incomeList.forEach(element => {     
-      this.total += element.amount;
+    this.incomeList.forEach(element => {
+      if (element.payType === ExpenseType.Monthly) {
+        this.total += element.amount * 12;
+      } else if (element.payType === ExpenseType.BiWeekly) {
+        this.total += element.amount * 24;
+      } else if (element.payType === ExpenseType.Weekly) {
+        this.total += element.amount * 36;
+      } else {
+        this.total += element.amount;
+      }
     });
+    this.isBusy = false;
   }
 
-  async openModal() {
+  async openModal(income) {
     const modal = await this.modalController.create({
       component: AddIncomePage,
-      // componentProps: {
-      //   "paramID": 123,
-      //   "paramTitle": "Test Title"
-      // }
+      componentProps: {
+        income
+      }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.incomeList.push(dataReturned.data);
+      if (dataReturned.data.id == null) {
         this.incomeService.saveIncome(dataReturned.data);
-        this.calculateTotal();
+      } else {
+        this.incomeService.updateIncome(dataReturned.data);
       }
+      this.calculateTotal();
     });
     return await modal.present();
   }
 
-
   ngOnInit() {
-    this.subscription  = this.incomeService.getIncomes().subscribe(res => {
+    this.subscription = this.incomeService.getIncomes().subscribe(res => {
       console.log(res);
       this.incomeList = res;
       this.calculateTotal();

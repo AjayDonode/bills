@@ -20,15 +20,18 @@ export class AppComponent {
   appPages = [
     {
       title: 'Add Income',
-      url: '/income'
+      url: '/income',
+      icon: 'book'
   },
     {
       title: 'Home',
-      url: '/home'
+      url: '/home',
+      icon: 'book'
     },
     {
         title: 'Setting',
-        url: '/setting'
+        url: '/setting',
+        icon: 'book'
     }
   ];
   initializeApp() {

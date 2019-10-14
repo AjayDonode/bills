@@ -12,11 +12,12 @@ import { AddIncomePageModule } from './add-income/add-income.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AddExpensePageModule } from './expenses/add-expenses/add-expense.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddIncomePageModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddIncomePageModule, AddExpensePageModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule],
   providers: [

@@ -3,7 +3,7 @@
     <ion-title>Your income</ion-title>
     <ion-buttons slot="start">
         <!-- <ion-button autoHide="false"><ion-icon name="arrow-back" slot="start"></ion-icon> </ion-button> -->
-        <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+        <ion-back-button defaultHref="tabs/task"></ion-back-button>
       </ion-buttons>
       <ion-buttons slot="end">
           <ion-button (click)="openModal()">
@@ -13,19 +13,20 @@
   </ion-toolbar>
  
 </ion-header>
-
+<ion-progress-bar type="indeterminate" hidden></ion-progress-bar>
 <ion-content>
   <ion-grid>
   <ion-row>
     <ion-col size-md="6" offset-md="3">
       <ion-list>
-        <ion-item *ngFor="let income of incomeList" #ival>
+        <ion-item *ngFor="let income of incomeList">
           <ion-label>{{ income.title }}</ion-label>
           <ion-label>{{ income.amount }}</ion-label>
+          <ion-icon name="create" (click)="edit(income)"></ion-icon>
           <ion-icon name="trash" (click)="delete(income)"></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-label>Total</ion-label>
+          <ion-label>Annual Income</ion-label>
           <ion-label>{{ total }}</ion-label>
           <ion-icon></ion-icon>
         </ion-item>
